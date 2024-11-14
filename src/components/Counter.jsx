@@ -1,13 +1,26 @@
 import { useState } from 'react';
 
-export default function Counter() {
+function Counter({ incrementValue, buttonColor }) {
   const [count, setCount] = useState(0);
+
+  const handleIncrement = () => {
+    setCount((prevCount) => {
+      const newCount = prevCount + incrementValue;
+      return newCount > 10 ? 0 : newCount;
+    });
+  };
 
   return (
     <div>
       <p>Counter: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-      <button onClick={() => setCount(count - 1)}>Decrement</button>
+      <button
+        onClick={handleIncrement}
+        style={{ backgroundColor: buttonColor }}
+      >
+        Increment by {incrementValue}
+      </button>
     </div>
   );
 }
+
+export default Counter;
